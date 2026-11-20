@@ -9,9 +9,7 @@ Everything is prepared in this folder (`fairodds/submission/`). The steps below 
 
 ## Before you open the form (2 prep items)
 
-1. **Public GitHub repo (REQUIRED by the PREDICT bounty).** The bounty eligibility floor is "working code, **public repo**, short demo". The FairOdds code currently lives only in `~/workspace/hackathons/solana-perps/fairodds/` on the VM — there is no public repo yet.
-   - Publish that folder as a public repo under your GitHub (**Sidik1702**). (Ask Muse to prepare a clean export first if you want — it must exclude `devnet-tester.keypair.json`, `target/deploy/*keypair*.json`, and `node_modules/`; the repo's `.gitignore` already covers keypairs and target/.)
-   - Copy the repo URL — you will paste it into the form (step 3) and into `WRITEUP.md` where the ⚠️ placeholder is.
+1. ✅ **DONE (2026-11-21) — Public GitHub repo:** **https://github.com/Sidik1702/fairodds** (published by Muse from the VM; initial commit `0f7d85d`, 120 files). Keypair safety was asserted before pushing (`.gitignore` covers `*keypair*`, `*secret*`, `.env*`, `target/`, `node_modules/`; `git ls-files | grep -i keypair` empty; a fresh clone was verified to contain no keypair files). The URL is already filled into `WRITEUP.md` — just paste it into the form's repository field (step 3).
 2. **Demo video hosting.** The submission folder contains `demo-video.mp4` (< 5 min). If the form asks for a video **link** instead of an upload, upload the file to your YouTube as **unlisted** and use that link. If it accepts a file upload, upload `demo-video.mp4` directly. (Do not re-record anything — the file is final.)
 
 ## The form, field by field
