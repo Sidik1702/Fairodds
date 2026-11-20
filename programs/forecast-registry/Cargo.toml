@@ -1,0 +1,30 @@
+[package]
+name = "forecast-registry"
+version = "0.1.0"
+description = "FairOdds ForecastRegistry — on-chain prediction commitments and resolution attestations for model-seeded pm-AMM markets"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "forecast_registry"
+
+[features]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+cpi = ["no-entrypoint"]
+default = []
+idl-build = ["anchor-lang/idl-build"]
+
+[dev-dependencies]
+# In-process SVM harness (sandbox blocks UDP — no local validator).
+# LiteSVM pairs with the solana-sdk 2.3 component tree that anchor-lang
+# 0.31.1 already resolves to.
+litesvm = "0.7"
+solana-sdk = "2.3"
+
+[dependencies]
+# Pinned exactly: anchor-lang 0.31.3's tree pulls edition2024 crates
+# (block-buffer 0.12.x via sha2 0.11) that the SBF/IDL toolchain's cargo
+# 1.79 cannot parse. 0.31.1's tree is edition-2021 throughout.
+anchor-lang = "=0.31.1"

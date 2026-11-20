@@ -1,0 +1,1 @@
+FairOdds: prediction markets that open at a forecast, and a forecaster that can't hide from its record. Built end-to-end on the pm-AMM — custom seeds, creator-fee alignment, and a track record anyone can recompute from chain data alone. Thanks for watching — FairOdds, by Pasukan Satset.

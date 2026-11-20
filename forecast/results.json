@@ -1,0 +1,200 @@
+{
+  "data_source": "Coinbase Exchange public API (hourly candles)",
+  "days": 180,
+  "horizon_hours": 24,
+  "strike_ratios": [
+    0.95,
+    0.975,
+    1.0,
+    1.025,
+    1.05
+  ],
+  "n_forecasts_total": 6320,
+  "per_asset": {
+    "SOL": {
+      "n_hours": 4320,
+      "n_forecasts": 3160,
+      "brier_model": 0.12623527949777363,
+      "brier_momentum": 0.1726386971872432,
+      "brier_base_rate": 0.12442019902354565,
+      "price_first": 85.55,
+      "price_last": 68.68
+    },
+    "BTC": {
+      "n_hours": 4320,
+      "n_forecasts": 3160,
+      "brier_model": 0.08842743654013036,
+      "brier_momentum": 0.12012737793289403,
+      "brier_base_rate": 0.08704252924988934,
+      "price_first": 76591.26,
+      "price_last": 59363.89
+    }
+  },
+  "by_strike_ratio": {
+    "0.95": {
+      "n": 1264,
+      "brier_model": 0.022911420113416642,
+      "brier_momentum": 0.0367955178210546,
+      "brier_base_rate": 0.022739249900202974,
+      "realized_yes_rate": 0.9778481012658228
+    },
+    "0.975": {
+      "n": 1264,
+      "brier_model": 0.11490941889895069,
+      "brier_momentum": 0.16295493820986395,
+      "brier_base_rate": 0.1142103216760843,
+      "realized_yes_rate": 0.872626582278481
+    },
+    "1.0": {
+      "n": 1264,
+      "brier_model": 0.2599730469080731,
+      "brier_momentum": 0.3478028167645976,
+      "brier_base_rate": 0.2531197539176023,
+      "realized_yes_rate": 0.5015822784810127
+    },
+    "1.025": {
+      "n": 1264,
+      "brier_model": 0.1000887935867578,
+      "brier_momentum": 0.13084082564225313,
+      "brier_base_rate": 0.09964863295673335,
+      "realized_yes_rate": 0.11313291139240507
+    },
+    "1.05": {
+      "n": 1264,
+      "brier_model": 0.03877411058756176,
+      "brier_momentum": 0.05352108936257385,
+      "brier_base_rate": 0.03893886223296454,
+      "realized_yes_rate": 0.040348101265822785
+    }
+  },
+  "overall": {
+    "brier_model": 0.107331358018952,
+    "brier_momentum": 0.14638303756006862,
+    "brier_base_rate": 0.10573136413671749,
+    "brier_coinflip": 0.25
+  },
+  "calibration_model": [
+    {
+      "bucket": "0.0-0.1",
+      "n": 1916,
+      "mean_pred": 0.03959331160811146,
+      "realized_freq": 0.05167014613778706
+    },
+    {
+      "bucket": "0.1-0.2",
+      "n": 454,
+      "mean_pred": 0.13710034921382092,
+      "realized_freq": 0.1277533039647577
+    },
+    {
+      "bucket": "0.2-0.3",
+      "n": 116,
+      "mean_pred": 0.24782525794449908,
+      "realized_freq": 0.3103448275862069
+    },
+    {
+      "bucket": "0.3-0.4",
+      "n": 112,
+      "mean_pred": 0.35179094109334696,
+      "realized_freq": 0.4375
+    },
+    {
+      "bucket": "0.4-0.5",
+      "n": 490,
+      "mean_pred": 0.4687720955717996,
+      "realized_freq": 0.49795918367346936
+    },
+    {
+      "bucket": "0.5-0.6",
+      "n": 647,
+      "mean_pred": 0.5364064058485133,
+      "realized_freq": 0.508500772797527
+    },
+    {
+      "bucket": "0.6-0.7",
+      "n": 99,
+      "mean_pred": 0.6489915477754636,
+      "realized_freq": 0.5959595959595959
+    },
+    {
+      "bucket": "0.7-0.8",
+      "n": 145,
+      "mean_pred": 0.7575523265762549,
+      "realized_freq": 0.7793103448275862
+    },
+    {
+      "bucket": "0.8-0.9",
+      "n": 712,
+      "mean_pred": 0.8549814062942768,
+      "realized_freq": 0.8581460674157303
+    },
+    {
+      "bucket": "0.9-1.0",
+      "n": 1629,
+      "mean_pred": 0.9623119129826342,
+      "realized_freq": 0.9631675874769797
+    }
+  ],
+  "calibration_momentum": [
+    {
+      "bucket": "0.0-0.1",
+      "n": 1880,
+      "mean_pred": 0.025525613139606114,
+      "realized_freq": 0.08829787234042553
+    },
+    {
+      "bucket": "0.1-0.2",
+      "n": 398,
+      "mean_pred": 0.14661560827524223,
+      "realized_freq": 0.2989949748743719
+    },
+    {
+      "bucket": "0.2-0.3",
+      "n": 311,
+      "mean_pred": 0.24837438900913425,
+      "realized_freq": 0.3536977491961415
+    },
+    {
+      "bucket": "0.3-0.4",
+      "n": 285,
+      "mean_pred": 0.34753156062644336,
+      "realized_freq": 0.4070175438596491
+    },
+    {
+      "bucket": "0.4-0.5",
+      "n": 265,
+      "mean_pred": 0.4481976525312559,
+      "realized_freq": 0.47924528301886793
+    },
+    {
+      "bucket": "0.5-0.6",
+      "n": 279,
+      "mean_pred": 0.5537644871808769,
+      "realized_freq": 0.5304659498207885
+    },
+    {
+      "bucket": "0.6-0.7",
+      "n": 280,
+      "mean_pred": 0.6518470768643704,
+      "realized_freq": 0.6
+    },
+    {
+      "bucket": "0.7-0.8",
+      "n": 340,
+      "mean_pred": 0.7516741863651876,
+      "realized_freq": 0.6323529411764706
+    },
+    {
+      "bucket": "0.8-0.9",
+      "n": 424,
+      "mean_pred": 0.8528274084591451,
+      "realized_freq": 0.7570754716981132
+    },
+    {
+      "bucket": "0.9-1.0",
+      "n": 1858,
+      "mean_pred": 0.9753486612079921,
+      "realized_freq": 0.9025834230355221
+    }
+  ]
+}

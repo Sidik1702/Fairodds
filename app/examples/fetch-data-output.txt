@@ -1,0 +1,10 @@
+
+> fairodds-app@0.2.0 fetch-data
+> node scripts/fetch-data.cjs
+
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+wrote /home/hatch/workspace/hackathons/solana-perps/fairodds/app/public/data.json
+records: 1 (resolved 1), mean Brier 0.1444 vs baseline 0.25
+  AJdwPfYkg3577B46VjPhAfVV7r1dnXryQkN5uEVquALq market=3KhWpiKLmWt4DJn4EbBJfRFK5M68Dpz5yto8HKd7zvAu prob=6200bps strike=$68.5 resolved=true outcome=YES brier=0.1444
+  market 3KhWpiKLmWt4DJn4EbBJfRFK5M68Dpz5yto8HKd7zvAu name="FairOdds live: SOL above $68.50 in 6 min? (seed 62%)" resolved=true winner=YES seed=6200bps
+  market 9mxS9rrZekcwvFPVo1nVqqNxNiE9PExhuSvyqzh3Vxni name="FairOdds smoke: SOL up in 5 min? (model seed 62%)" resolved=true winner=YES seed=6200bps

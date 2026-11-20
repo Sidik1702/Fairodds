@@ -1,0 +1,41 @@
+{
+  "step": "step3-live-run",
+  "startedAt": "2026-11-20T18:58:02.564Z",
+  "keeper": "6c1eJRKMymbts1wPK5yxDPBg9ZXcdXRVVRmFGVhNTHFH",
+  "solBeforeLamports": 4372806440,
+  "musdcBefore": 952.727492,
+  "job": {
+    "kind": "synthetic demonstration job (not a forecast-engine slate entry)",
+    "asset": "SOL",
+    "spotAtStart": 68.98,
+    "strikeUsd": 68.5,
+    "strikeRaw": "6850000000",
+    "probBps": 6200,
+    "probNote": "6200 bps demo seed (the Day-2 model-style seed); the engine slate is 24h markets, this run needs 360 s",
+    "durationSecs": 360,
+    "depositMusdc": 10,
+    "marketName": "FairOdds live: SOL above $68.50 in 6 min? (seed 62%)",
+    "modelVersion": "kernel-lr-v1"
+  },
+  "marketId": 220999436532452,
+  "market": "3KhWpiKLmWt4DJn4EbBJfRFK5M68Dpz5yto8HKd7zvAu",
+  "predictionRecord": "AJdwPfYkg3577B46VjPhAfVV7r1dnXryQkN5uEVquALq",
+  "issuedAt": 1795201084,
+  "predictionHashHex": "5fb459a0f85b0b7bda8b4d0d9a6a9d96206a4fdafc9bc40e6b7f7c8e8c36b8a0",
+  "commitSignature": "4Aij4CogZRm86iZ5p6HYNH2bwKVEXGaQdVmNjvUvvj3TSXCpVL1WrRaT7P1i51dnQZGMZUkiFTTEhMj4UHEruMnu",
+  "endTs": 1795201448,
+  "createSignature": "4oPQGst7kVKfjtVNKc9fdrBFbBwGXGsM75JweRdtkpNa15XhJgYd7qduiiS2T2hANYGWmoz6cRxfcsStfbFzvwBG",
+  "musdcAfterCreate": 942.727492,
+  "expiryRead": {
+    "source": "Coinbase Exchange public ticker (forecast engine's data source)",
+    "fallbackNote": "Legacy Pyth devnet SOL/USD feed is stale and Hermes is unreachable from this sandbox (BUILD-LOG Step 3); pyth_price_account is attested as the none sentinel (Pubkey::default()).",
+    "priceUsd": 68.58,
+    "priceRaw": "68.58",
+    "fetchedAt": 1795201454,
+    "observedRaw": "6858000000",
+    "observedSlot": 524451475,
+    "outcomeYes": true
+  },
+  "resolveSignature": "3nnrriN6LakGULYCAWruFuYzbKzJTY15MQyQakcxN38KCqbzSSvPXeRAtAccCZPSSrwMgKshfo6XsrvQq9TZQbZf",
+  "attestSignature": "bABje8SjXwXV5jJumFDiqJaMuytEC5KC8wT6BBSUPCa8KVSTz3J58vPwQVv5fZV8JQWjYYy81VYWD3yNifTrsAi"
+}

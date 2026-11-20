@@ -1,0 +1,13 @@
+{
+  "name": "fairodds-pmamm-lifecycle",
+  "version": "0.1.0",
+  "private": true,
+  "description": "FairOdds Nov 20 step: pm-AMM devnet lifecycle smoke test (create market -> swap -> resolve -> claim) via @pm-amm/sdk.",
+  "type": "commonjs",
+  "dependencies": {
+    "@pm-amm/sdk": "latest",
+    "@solana/web3.js": "^1.95.0",
+    "@anchor-lang/core": "latest",
+    "@solana/spl-token": "^0.4.0"
+  }
+}

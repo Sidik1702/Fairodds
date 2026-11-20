@@ -1,0 +1,25 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1920px;height:1080px;background:#0b0e17;color:#e8ecf4;font-family:'DejaVu Sans',Arial,sans-serif;padding:64px 90px}
+h1{font-size:54px;margin-bottom:10px}
+.sub{font-size:27px;color:#9aa4bd;margin-bottom:42px}
+.row{display:flex;align-items:center;gap:28px;background:#101527;border:1.5px solid #232a45;border-radius:18px;padding:26px 34px;margin-bottom:20px}
+.num{flex:0 0 auto;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#8b5cf6,#2ee6a8);color:#0b0e17;font-size:30px;font-weight:bold;display:flex;align-items:center;justify-content:center}
+.step{flex:0 0 300px}
+.step b{font-size:31px;display:block}
+.step span{font-size:23px;color:#9aa4bd}
+.sig{flex:0 0 430px;font-family:'DejaVu Sans Mono',monospace;font-size:25px;color:#2ee6a8}
+.desc{flex:1;font-size:26px;color:#c6cddd;line-height:1.4}
+.desc b{color:#fff}
+.note{margin-top:34px;background:#101527;border:1.5px solid #232a45;border-radius:18px;padding:24px 34px;font-size:25px;color:#9aa4bd;line-height:1.5}
+.note b{color:#e8ecf4}
+.mono{font-family:'DejaVu Sans Mono',monospace;color:#2ee6a8}
+</style></head><body>
+<h1>One forecast, end to end — live on devnet</h1>
+<div class="sub">“SOL above $68.50 in 6 min?” · model probability 62.00% (6200 bps) · 10 mUSDC LP · every step a finalized transaction</div>
+<div class="row"><div class="num">1</div><div class="step"><b>COMMIT</b><span>slot 524,449,937</span></div><div class="sig">4Aij4Cog…HEruMnu</div><div class="desc"><b>commit_prediction</b> — the PredictionRecord exists on-chain <b>before the market does</b></div></div>
+<div class="row"><div class="num">2</div><div class="step"><b>CREATE</b><span>slot 524,449,954</span></div><div class="sig">4oPQGst7…fbFzvwBG</div><div class="desc">pm-AMM market created with the same chosen ID, <b>custom seed 6200 bps</b></div></div>
+<div class="row"><div class="num">3</div><div class="step"><b>RESOLVE</b><span>slot 524,451,479</span></div><div class="sig">3nnrriN6…Qq9TZQbZf</div><div class="desc">Observed <b>$68.58 &gt; strike $68.50 → YES</b> (documented Coinbase-at-expiry read)</div></div>
+<div class="row"><div class="num">4</div><div class="step"><b>ATTEST</b><span>slot 524,451,610</span></div><div class="sig">bABje8Sj…NifTrsAi</div><div class="desc"><b>attest_resolution</b> — Brier computed <b>in-program: 0.1444</b> (e8 = 14,440,000)</div></div>
+<div class="note">Record <span class="mono">AJdwPfYk…uALq</span> · Market <span class="mono">3KhWpiK…zvAu</span> · Program <span class="mono">G4Gib3N2…17VgU</span> — <b>executable on devnet; deployed bytecode sha256 byte-identical to the shipped source build.</b> All four transactions finalized, err = null. Full signatures + explorer links in the submission write-up.</div>
+</body></html>

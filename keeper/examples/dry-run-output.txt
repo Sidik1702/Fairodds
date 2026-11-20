@@ -1,0 +1,371 @@
+FairOdds keeper — DRY-RUN plan (nothing is sent in this mode)
+slate source: forecast/slate.py executed fresh (engine output written to /tmp/fairodds-slate-23418-1795196877988.json)
+slate generated_at: 1795196885 (2026-11-20T17:48:05.000Z)
+jobs: 6
+keeper signer (SIMULATED for dry-run): AhND3iAdieTmmyRKqi5ZhR3xn6oy9WYvfdW27E91kgDx
+commit issued_at (hash input): 1795196885
+LP deposit per market: 50 mUSDC (devnet mock USDC)
+
+Slate summary:
+  SOL  strike $67.5  model p=71.95% (7195 bps)  endTs 1795283281 (2026-11-21T17:48:01.000Z)  "Will SOL close above $67.50 in 24h?"
+  SOL  strike $69  model p=46.35% (4635 bps)  endTs 1795283281 (2026-11-21T17:48:01.000Z)  "Will SOL close above $69.00 in 24h?"
+  SOL  strike $69.5  model p=28.49% (2849 bps)  endTs 1795283281 (2026-11-21T17:48:01.000Z)  "Will SOL close above $69.50 in 24h?"
+  BTC  strike $57750  model p=80.74% (8074 bps)  endTs 1795283285 (2026-11-21T17:48:05.000Z)  "Will BTC close above $57750 in 24h?"
+  BTC  strike $58350  model p=67.91% (6791 bps)  endTs 1795283285 (2026-11-21T17:48:05.000Z)  "Will BTC close above $58350 in 24h?"
+  BTC  strike $58950  model p=38.20% (3820 bps)  endTs 1795283285 (2026-11-21T17:48:05.000Z)  "Will BTC close above $58950 in 24h?"
+
+====================================================================================================
+JOB 1/6: "Will SOL close above $67.50 in 24h?" — strike $67.5 (raw 6750000000), probBps 7195, initialPriceBps 7195, endTs 1795283281
+====================================================================================================
+
+  Step 1/5 — COMMIT   ForecastRegistry.commit_prediction — before trading opens
+    program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    status: PENDING-DEPLOY (instruction built exactly; send gated)
+    market_simulated: 9psZvGSv6hsSxAEW8coq8tsCtThh2mVHufhYPyqEfxtk
+    prediction_record_pda: 5NxiL6tfvCc4G4fiqAaWUcvXEgBUfYVoL37WoAzFzoNN
+    pda_bump: 255
+    prediction_hash_sha256: c43f5489d6d7be1b14e8e9ab38bc4b79617cdadb99555c1b4abd058998860acb
+    hash_inputs: sha256(market || prob_bps u16LE=7195 || model_version="kernel-lr-v1" || issued_at i64LE=1795196885)
+    model_prob_bps: 7195
+    model_version: kernel-lr-v1
+    strike_raw: 6750000000
+    instruction.program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    instruction.key: 5NxiL6tfvCc4G4fiqAaWUcvXEgBUfYVoL37WoAzFzoNN (signer=false, writable=true)
+    instruction.key: AhND3iAdieTmmyRKqi5ZhR3xn6oy9WYvfdW27E91kgDx (signer=true, writable=true)
+    instruction.key: 11111111111111111111111111111111 (signer=false, writable=false)
+    instruction.data: 98 bytes
+    instruction.data_hex: 5cfab6e70a16ea478320f8695f8879aa77c800d67391afc60a7a2e5f1c32acfe1707530911dce435c43f5489d6d7be1b14e8e9ab38bc4b79617cdadb99555c1b4abd058998860acb1b1c0c0000006b65726e656c2d6c722d763180d3549201000000
+
+  Step 2/5 — CREATE   pm-AMM createMarket — custom seed = model probability
+    program: GV1FMGHRYBjQLaghE5fnGuYCuCcpdt3GD5xEX3TwN16y (pm-AMM)
+    sdk_call: client.send.createMarket
+    params: {"name":"Will SOL close above $67.50 in 24h?","durationSecs":86400,"initialPriceBps":7195,"depositUsdc":50}
+    note: custom seed: the market opens at the model's fair price, not 50%
+
+  Step 3/5 — WAIT     until market endTs
+    opens_at: 1795196881
+    endTs: 1795283281
+    endTs_iso: 2026-11-21T17:48:01.000Z
+    duration_secs: 86400
+
+  Step 4/5 — RESOLVE  pm-AMM resolveMarket — outcome from the Pyth read at expiry
+    program: GV1FMGHRYBjQLaghE5fnGuYCuCcpdt3GD5xEX3TwN16y (pm-AMM)
+    sdk_call: client.send.resolveMarket(market, "yes")
+    outcome_basis: ILLUSTRATIVE in dry-run: outcome derived from the slate spot as a stand-in for the Pyth read at expiry (YES iff observed price > strike)
+    strike_raw: 6750000000
+    observed_raw_illustrative: 6885000000
+    outcome_yes_illustrative: true
+
+  Step 5/5 — ATTEST   ForecastRegistry.attest_resolution — Brier computed in-program
+    program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    status: PENDING-DEPLOY (instruction built exactly; send gated)
+    market_simulated: 9psZvGSv6hsSxAEW8coq8tsCtThh2mVHufhYPyqEfxtk
+    prediction_record_pda: 5NxiL6tfvCc4G4fiqAaWUcvXEgBUfYVoL37WoAzFzoNN
+    outcome_yes_illustrative: true
+    pyth_price_account_simulated: 5PxG6MBNjkYo72vKSVwjP7ivJMytsrLQkCw2UJgZTbvh
+    observed_price_raw_illustrative: 6885000000
+    observed_slot: 0 in dry-run (real slot filled at live resolution)
+    expected_brier_e8_if_outcome: 7868025
+    brier_note: Brier x1e8, computed in-program at attestation; flat-50% baseline = 25000000
+    instruction.program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    instruction.key: 5NxiL6tfvCc4G4fiqAaWUcvXEgBUfYVoL37WoAzFzoNN (signer=false, writable=true)
+    instruction.key: AhND3iAdieTmmyRKqi5ZhR3xn6oy9WYvfdW27E91kgDx (signer=true, writable=false)
+    instruction.data: 57 bytes
+    instruction.data_hex: 8a351011d1b99305014150022816a32d891a674337e96c17f6ec102a072a173014913dc665f19c372240c3609a010000000000000000000000
+
+====================================================================================================
+JOB 2/6: "Will SOL close above $69.00 in 24h?" — strike $69 (raw 6900000000), probBps 4635, initialPriceBps 4635, endTs 1795283281
+====================================================================================================
+
+  Step 1/5 — COMMIT   ForecastRegistry.commit_prediction — before trading opens
+    program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    status: PENDING-DEPLOY (instruction built exactly; send gated)
+    market_simulated: 8em94Py6hP8gbshGs3SstU7sEYjPckA1qoKbp6XgQhhj
+    prediction_record_pda: 7A7KnKNZbDkjfeGgYDTENDqrmgQouxTiFNNmsMSXnwPx
+    pda_bump: 254
+    prediction_hash_sha256: 6ba5c2ed97387a4a37d24eff902cc7de8210273c4ae4cc5442e6313c38adb6c8
+    hash_inputs: sha256(market || prob_bps u16LE=4635 || model_version="kernel-lr-v1" || issued_at i64LE=1795196885)
+    model_prob_bps: 4635
+    model_version: kernel-lr-v1
+    strike_raw: 6900000000
+    instruction.program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    instruction.key: 7A7KnKNZbDkjfeGgYDTENDqrmgQouxTiFNNmsMSXnwPx (signer=false, writable=true)
+    instruction.key: AhND3iAdieTmmyRKqi5ZhR3xn6oy9WYvfdW27E91kgDx (signer=true, writable=true)
+    instruction.key: 11111111111111111111111111111111 (signer=false, writable=false)
+    instruction.data: 98 bytes
+    instruction.data_hex: 5cfab6e70a16ea4771ae34dbd5e7a221d0b18e3d3c1dee54504f4c9819ed165c19b7eafc65ad11626ba5c2ed97387a4a37d24eff902cc7de8210273c4ae4cc5442e6313c38adb6c81b120c0000006b65726e656c2d6c722d763100a5459b01000000
+
+  Step 2/5 — CREATE   pm-AMM createMarket — custom seed = model probability
+    program: GV1FMGHRYBjQLaghE5fnGuYCuCcpdt3GD5xEX3TwN16y (pm-AMM)
+    sdk_call: client.send.createMarket
+    params: {"name":"Will SOL close above $69.00 in 24h?","durationSecs":86400,"initialPriceBps":4635,"depositUsdc":50}
+    note: custom seed: the market opens at the model's fair price, not 50%
+
+  Step 3/5 — WAIT     until market endTs
+    opens_at: 1795196881
+    endTs: 1795283281
+    endTs_iso: 2026-11-21T17:48:01.000Z
+    duration_secs: 86400
+
+  Step 4/5 — RESOLVE  pm-AMM resolveMarket — outcome from the Pyth read at expiry
+    program: GV1FMGHRYBjQLaghE5fnGuYCuCcpdt3GD5xEX3TwN16y (pm-AMM)
+    sdk_call: client.send.resolveMarket(market, "no")
+    outcome_basis: ILLUSTRATIVE in dry-run: outcome derived from the slate spot as a stand-in for the Pyth read at expiry (YES iff observed price > strike)
+    strike_raw: 6900000000
+    observed_raw_illustrative: 6885000000
+    outcome_yes_illustrative: false
+
+  Step 5/5 — ATTEST   ForecastRegistry.attest_resolution — Brier computed in-program
+    program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    status: PENDING-DEPLOY (instruction built exactly; send gated)
+    market_simulated: 8em94Py6hP8gbshGs3SstU7sEYjPckA1qoKbp6XgQhhj
+    prediction_record_pda: 7A7KnKNZbDkjfeGgYDTENDqrmgQouxTiFNNmsMSXnwPx
+    outcome_yes_illustrative: false
+    pyth_price_account_simulated: 5PxG6MBNjkYo72vKSVwjP7ivJMytsrLQkCw2UJgZTbvh
+    observed_price_raw_illustrative: 6885000000
+    observed_slot: 0 in dry-run (real slot filled at live resolution)
+    expected_brier_e8_if_outcome: 21483225
+    brier_note: Brier x1e8, computed in-program at attestation; flat-50% baseline = 25000000
+    instruction.program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    instruction.key: 7A7KnKNZbDkjfeGgYDTENDqrmgQouxTiFNNmsMSXnwPx (signer=false, writable=true)
+    instruction.key: AhND3iAdieTmmyRKqi5ZhR3xn6oy9WYvfdW27E91kgDx (signer=true, writable=false)
+    instruction.data: 57 bytes
+    instruction.data_hex: 8a351011d1b99305004150022816a32d891a674337e96c17f6ec102a072a173014913dc665f19c372240c3609a010000000000000000000000
+
+====================================================================================================
+JOB 3/6: "Will SOL close above $69.50 in 24h?" — strike $69.5 (raw 6950000000), probBps 2849, initialPriceBps 2849, endTs 1795283281
+====================================================================================================
+
+  Step 1/5 — COMMIT   ForecastRegistry.commit_prediction — before trading opens
+    program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    status: PENDING-DEPLOY (instruction built exactly; send gated)
+    market_simulated: BhgZAWZ6E61qiLCDuxhuBSy6VFKPBnLsj5ikvVTTkyMt
+    prediction_record_pda: 6SmVeQ3a22WjHq4tPGnJHWSHhNWwXt6F9mbSJpDzv1B8
+    pda_bump: 254
+    prediction_hash_sha256: 7a6857cf9cbca429d3cd8a7affcc477578d0b8de0a56e98200a95f75552759b9
+    hash_inputs: sha256(market || prob_bps u16LE=2849 || model_version="kernel-lr-v1" || issued_at i64LE=1795196885)
+    model_prob_bps: 2849
+    model_version: kernel-lr-v1
+    strike_raw: 6950000000
+    instruction.program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    instruction.key: 6SmVeQ3a22WjHq4tPGnJHWSHhNWwXt6F9mbSJpDzv1B8 (signer=false, writable=true)
+    instruction.key: AhND3iAdieTmmyRKqi5ZhR3xn6oy9WYvfdW27E91kgDx (signer=true, writable=true)
+    instruction.key: 11111111111111111111111111111111 (signer=false, writable=false)
+    instruction.data: 98 bytes
+    instruction.data_hex: 5cfab6e70a16ea479f00d37b48bda00c45a588e04be97285102c9ec351ca53ce2cab74b16bc35fb37a6857cf9cbca429d3cd8a7affcc477578d0b8de0a56e98200a95f75552759b9210b0c0000006b65726e656c2d6c722d76318095409e01000000
+
+  Step 2/5 — CREATE   pm-AMM createMarket — custom seed = model probability
+    program: GV1FMGHRYBjQLaghE5fnGuYCuCcpdt3GD5xEX3TwN16y (pm-AMM)
+    sdk_call: client.send.createMarket
+    params: {"name":"Will SOL close above $69.50 in 24h?","durationSecs":86400,"initialPriceBps":2849,"depositUsdc":50}
+    note: custom seed: the market opens at the model's fair price, not 50%
+
+  Step 3/5 — WAIT     until market endTs
+    opens_at: 1795196881
+    endTs: 1795283281
+    endTs_iso: 2026-11-21T17:48:01.000Z
+    duration_secs: 86400
+
+  Step 4/5 — RESOLVE  pm-AMM resolveMarket — outcome from the Pyth read at expiry
+    program: GV1FMGHRYBjQLaghE5fnGuYCuCcpdt3GD5xEX3TwN16y (pm-AMM)
+    sdk_call: client.send.resolveMarket(market, "no")
+    outcome_basis: ILLUSTRATIVE in dry-run: outcome derived from the slate spot as a stand-in for the Pyth read at expiry (YES iff observed price > strike)
+    strike_raw: 6950000000
+    observed_raw_illustrative: 6885000000
+    outcome_yes_illustrative: false
+
+  Step 5/5 — ATTEST   ForecastRegistry.attest_resolution — Brier computed in-program
+    program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    status: PENDING-DEPLOY (instruction built exactly; send gated)
+    market_simulated: BhgZAWZ6E61qiLCDuxhuBSy6VFKPBnLsj5ikvVTTkyMt
+    prediction_record_pda: 6SmVeQ3a22WjHq4tPGnJHWSHhNWwXt6F9mbSJpDzv1B8
+    outcome_yes_illustrative: false
+    pyth_price_account_simulated: 5PxG6MBNjkYo72vKSVwjP7ivJMytsrLQkCw2UJgZTbvh
+    observed_price_raw_illustrative: 6885000000
+    observed_slot: 0 in dry-run (real slot filled at live resolution)
+    expected_brier_e8_if_outcome: 8116801
+    brier_note: Brier x1e8, computed in-program at attestation; flat-50% baseline = 25000000
+    instruction.program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    instruction.key: 6SmVeQ3a22WjHq4tPGnJHWSHhNWwXt6F9mbSJpDzv1B8 (signer=false, writable=true)
+    instruction.key: AhND3iAdieTmmyRKqi5ZhR3xn6oy9WYvfdW27E91kgDx (signer=true, writable=false)
+    instruction.data: 57 bytes
+    instruction.data_hex: 8a351011d1b99305004150022816a32d891a674337e96c17f6ec102a072a173014913dc665f19c372240c3609a010000000000000000000000
+
+====================================================================================================
+JOB 4/6: "Will BTC close above $57750 in 24h?" — strike $57750 (raw 5775000000000), probBps 8074, initialPriceBps 8074, endTs 1795283285
+====================================================================================================
+
+  Step 1/5 — COMMIT   ForecastRegistry.commit_prediction — before trading opens
+    program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    status: PENDING-DEPLOY (instruction built exactly; send gated)
+    market_simulated: 2Pmx4XdUf6tFJgu8hjAAZnAV5iWjLY6KuoQz6ruLTbsp
+    prediction_record_pda: DGAbdUo443KHZSatqMeXK1ELbPvryGexLGDJWkxYyLyS
+    pda_bump: 255
+    prediction_hash_sha256: 18522651d8b609884c3378b2edc09e4132f518ac42195da8b3e5f83e8bf64a3a
+    hash_inputs: sha256(market || prob_bps u16LE=8074 || model_version="kernel-lr-v1" || issued_at i64LE=1795196885)
+    model_prob_bps: 8074
+    model_version: kernel-lr-v1
+    strike_raw: 5775000000000
+    instruction.program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    instruction.key: DGAbdUo443KHZSatqMeXK1ELbPvryGexLGDJWkxYyLyS (signer=false, writable=true)
+    instruction.key: AhND3iAdieTmmyRKqi5ZhR3xn6oy9WYvfdW27E91kgDx (signer=true, writable=true)
+    instruction.key: 11111111111111111111111111111111 (signer=false, writable=false)
+    instruction.data: 98 bytes
+    instruction.data_hex: 5cfab6e70a16ea4714b14a01c35b88cf86a904296261621e945b430bf1877b998899e28e69f87ccb18522651d8b609884c3378b2edc09e4132f518ac42195da8b3e5f83e8bf64a3a8a1f0c0000006b65726e656c2d6c722d763100d6d29840050000
+
+  Step 2/5 — CREATE   pm-AMM createMarket — custom seed = model probability
+    program: GV1FMGHRYBjQLaghE5fnGuYCuCcpdt3GD5xEX3TwN16y (pm-AMM)
+    sdk_call: client.send.createMarket
+    params: {"name":"Will BTC close above $57750 in 24h?","durationSecs":86400,"initialPriceBps":8074,"depositUsdc":50}
+    note: custom seed: the market opens at the model's fair price, not 50%
+
+  Step 3/5 — WAIT     until market endTs
+    opens_at: 1795196885
+    endTs: 1795283285
+    endTs_iso: 2026-11-21T17:48:05.000Z
+    duration_secs: 86400
+
+  Step 4/5 — RESOLVE  pm-AMM resolveMarket — outcome from the Pyth read at expiry
+    program: GV1FMGHRYBjQLaghE5fnGuYCuCcpdt3GD5xEX3TwN16y (pm-AMM)
+    sdk_call: client.send.resolveMarket(market, "yes")
+    outcome_basis: ILLUSTRATIVE in dry-run: outcome derived from the slate spot as a stand-in for the Pyth read at expiry (YES iff observed price > strike)
+    strike_raw: 5775000000000
+    observed_raw_illustrative: 5893316000000
+    outcome_yes_illustrative: true
+
+  Step 5/5 — ATTEST   ForecastRegistry.attest_resolution — Brier computed in-program
+    program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    status: PENDING-DEPLOY (instruction built exactly; send gated)
+    market_simulated: 2Pmx4XdUf6tFJgu8hjAAZnAV5iWjLY6KuoQz6ruLTbsp
+    prediction_record_pda: DGAbdUo443KHZSatqMeXK1ELbPvryGexLGDJWkxYyLyS
+    outcome_yes_illustrative: true
+    pyth_price_account_simulated: FnYihByUPZLTaURbyvwoefj2t4yxGiJbLRdyY2rHUAdc
+    observed_price_raw_illustrative: 5893316000000
+    observed_slot: 0 in dry-run (real slot filled at live resolution)
+    expected_brier_e8_if_outcome: 3709476
+    brier_note: Brier x1e8, computed in-program at attestation; flat-50% baseline = 25000000
+    instruction.program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    instruction.key: DGAbdUo443KHZSatqMeXK1ELbPvryGexLGDJWkxYyLyS (signer=false, writable=true)
+    instruction.key: AhND3iAdieTmmyRKqi5ZhR3xn6oy9WYvfdW27E91kgDx (signer=true, writable=false)
+    instruction.data: 57 bytes
+    instruction.data_hex: 8a351011d1b9930501dbae9e34742e051af61d983a7af1979d2be6b7a011c09ef1ab909e5317ebf92700b901255c0500000000000000000000
+
+====================================================================================================
+JOB 5/6: "Will BTC close above $58350 in 24h?" — strike $58350 (raw 5835000000000), probBps 6791, initialPriceBps 6791, endTs 1795283285
+====================================================================================================
+
+  Step 1/5 — COMMIT   ForecastRegistry.commit_prediction — before trading opens
+    program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    status: PENDING-DEPLOY (instruction built exactly; send gated)
+    market_simulated: H4WNwkQoeC3icwuNqVqBn9ezRujHvf3pFnPeq9hwqAtY
+    prediction_record_pda: GDQexhuAgkQ2ZqfhmefSxC2a2uktVodTjH3KX2ECjvaH
+    pda_bump: 254
+    prediction_hash_sha256: 22fb540cd2751a30264a60a0f3616dfa715724897f4a55ccfad178535655e3ac
+    hash_inputs: sha256(market || prob_bps u16LE=6791 || model_version="kernel-lr-v1" || issued_at i64LE=1795196885)
+    model_prob_bps: 6791
+    model_version: kernel-lr-v1
+    strike_raw: 5835000000000
+    instruction.program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    instruction.key: GDQexhuAgkQ2ZqfhmefSxC2a2uktVodTjH3KX2ECjvaH (signer=false, writable=true)
+    instruction.key: AhND3iAdieTmmyRKqi5ZhR3xn6oy9WYvfdW27E91kgDx (signer=true, writable=true)
+    instruction.key: 11111111111111111111111111111111 (signer=false, writable=false)
+    instruction.data: 98 bytes
+    instruction.data_hex: 5cfab6e70a16ea47eea0f39219c7064885a246736e73055c7eb9cbd39a55bb2a04917ee1934a6ad122fb540cd2751a30264a60a0f3616dfa715724897f4a55ccfad178535655e3ac871a0c0000006b65726e656c2d6c722d7631002e1a914e050000
+
+  Step 2/5 — CREATE   pm-AMM createMarket — custom seed = model probability
+    program: GV1FMGHRYBjQLaghE5fnGuYCuCcpdt3GD5xEX3TwN16y (pm-AMM)
+    sdk_call: client.send.createMarket
+    params: {"name":"Will BTC close above $58350 in 24h?","durationSecs":86400,"initialPriceBps":6791,"depositUsdc":50}
+    note: custom seed: the market opens at the model's fair price, not 50%
+
+  Step 3/5 — WAIT     until market endTs
+    opens_at: 1795196885
+    endTs: 1795283285
+    endTs_iso: 2026-11-21T17:48:05.000Z
+    duration_secs: 86400
+
+  Step 4/5 — RESOLVE  pm-AMM resolveMarket — outcome from the Pyth read at expiry
+    program: GV1FMGHRYBjQLaghE5fnGuYCuCcpdt3GD5xEX3TwN16y (pm-AMM)
+    sdk_call: client.send.resolveMarket(market, "yes")
+    outcome_basis: ILLUSTRATIVE in dry-run: outcome derived from the slate spot as a stand-in for the Pyth read at expiry (YES iff observed price > strike)
+    strike_raw: 5835000000000
+    observed_raw_illustrative: 5893316000000
+    outcome_yes_illustrative: true
+
+  Step 5/5 — ATTEST   ForecastRegistry.attest_resolution — Brier computed in-program
+    program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    status: PENDING-DEPLOY (instruction built exactly; send gated)
+    market_simulated: H4WNwkQoeC3icwuNqVqBn9ezRujHvf3pFnPeq9hwqAtY
+    prediction_record_pda: GDQexhuAgkQ2ZqfhmefSxC2a2uktVodTjH3KX2ECjvaH
+    outcome_yes_illustrative: true
+    pyth_price_account_simulated: FnYihByUPZLTaURbyvwoefj2t4yxGiJbLRdyY2rHUAdc
+    observed_price_raw_illustrative: 5893316000000
+    observed_slot: 0 in dry-run (real slot filled at live resolution)
+    expected_brier_e8_if_outcome: 10297681
+    brier_note: Brier x1e8, computed in-program at attestation; flat-50% baseline = 25000000
+    instruction.program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    instruction.key: GDQexhuAgkQ2ZqfhmefSxC2a2uktVodTjH3KX2ECjvaH (signer=false, writable=true)
+    instruction.key: AhND3iAdieTmmyRKqi5ZhR3xn6oy9WYvfdW27E91kgDx (signer=true, writable=false)
+    instruction.data: 57 bytes
+    instruction.data_hex: 8a351011d1b9930501dbae9e34742e051af61d983a7af1979d2be6b7a011c09ef1ab909e5317ebf92700b901255c0500000000000000000000
+
+====================================================================================================
+JOB 6/6: "Will BTC close above $58950 in 24h?" — strike $58950 (raw 5895000000000), probBps 3820, initialPriceBps 3820, endTs 1795283285
+====================================================================================================
+
+  Step 1/5 — COMMIT   ForecastRegistry.commit_prediction — before trading opens
+    program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    status: PENDING-DEPLOY (instruction built exactly; send gated)
+    market_simulated: Cj9oZPnGWaaeTAXca27hoHLMMH5jZMGqusmHZ6eu1KLK
+    prediction_record_pda: 4x5DjcK88MB7YdGbFYaP85z42gdPZwPkgqkdyajN2ewB
+    pda_bump: 255
+    prediction_hash_sha256: 675bbe0346b990e3a340e0369ee3ae346e9907f9745aba0508e2e48aa3f1cfb9
+    hash_inputs: sha256(market || prob_bps u16LE=3820 || model_version="kernel-lr-v1" || issued_at i64LE=1795196885)
+    model_prob_bps: 3820
+    model_version: kernel-lr-v1
+    strike_raw: 5895000000000
+    instruction.program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    instruction.key: 4x5DjcK88MB7YdGbFYaP85z42gdPZwPkgqkdyajN2ewB (signer=false, writable=true)
+    instruction.key: AhND3iAdieTmmyRKqi5ZhR3xn6oy9WYvfdW27E91kgDx (signer=true, writable=true)
+    instruction.key: 11111111111111111111111111111111 (signer=false, writable=false)
+    instruction.data: 98 bytes
+    instruction.data_hex: 5cfab6e70a16ea47ae3ce748ab9aa904e3ea351e9de219f047d1c6c6c0c7ef2d0c02538208827788675bbe0346b990e3a340e0369ee3ae346e9907f9745aba0508e2e48aa3f1cfb9ec0e0c0000006b65726e656c2d6c722d7631008661895c050000
+
+  Step 2/5 — CREATE   pm-AMM createMarket — custom seed = model probability
+    program: GV1FMGHRYBjQLaghE5fnGuYCuCcpdt3GD5xEX3TwN16y (pm-AMM)
+    sdk_call: client.send.createMarket
+    params: {"name":"Will BTC close above $58950 in 24h?","durationSecs":86400,"initialPriceBps":3820,"depositUsdc":50}
+    note: custom seed: the market opens at the model's fair price, not 50%
+
+  Step 3/5 — WAIT     until market endTs
+    opens_at: 1795196885
+    endTs: 1795283285
+    endTs_iso: 2026-11-21T17:48:05.000Z
+    duration_secs: 86400
+
+  Step 4/5 — RESOLVE  pm-AMM resolveMarket — outcome from the Pyth read at expiry
+    program: GV1FMGHRYBjQLaghE5fnGuYCuCcpdt3GD5xEX3TwN16y (pm-AMM)
+    sdk_call: client.send.resolveMarket(market, "no")
+    outcome_basis: ILLUSTRATIVE in dry-run: outcome derived from the slate spot as a stand-in for the Pyth read at expiry (YES iff observed price > strike)
+    strike_raw: 5895000000000
+    observed_raw_illustrative: 5893316000000
+    outcome_yes_illustrative: false
+
+  Step 5/5 — ATTEST   ForecastRegistry.attest_resolution — Brier computed in-program
+    program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    status: PENDING-DEPLOY (instruction built exactly; send gated)
+    market_simulated: Cj9oZPnGWaaeTAXca27hoHLMMH5jZMGqusmHZ6eu1KLK
+    prediction_record_pda: 4x5DjcK88MB7YdGbFYaP85z42gdPZwPkgqkdyajN2ewB
+    outcome_yes_illustrative: false
+    pyth_price_account_simulated: FnYihByUPZLTaURbyvwoefj2t4yxGiJbLRdyY2rHUAdc
+    observed_price_raw_illustrative: 5893316000000
+    observed_slot: 0 in dry-run (real slot filled at live resolution)
+    expected_brier_e8_if_outcome: 14592400
+    brier_note: Brier x1e8, computed in-program at attestation; flat-50% baseline = 25000000
+    instruction.program: G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU
+    instruction.key: 4x5DjcK88MB7YdGbFYaP85z42gdPZwPkgqkdyajN2ewB (signer=false, writable=true)
+    instruction.key: AhND3iAdieTmmyRKqi5ZhR3xn6oy9WYvfdW27E91kgDx (signer=true, writable=false)
+    instruction.data: 57 bytes
+    instruction.data_hex: 8a351011d1b9930500dbae9e34742e051af61d983a7af1979d2be6b7a011c09ef1ab909e5317ebf92700b901255c0500000000000000000000
+
+Ordering guarantee: for every job, commit precedes create (the prediction is fixed on-chain before trading opens), and attest follows resolve. Registry sends are PENDING-DEPLOY; pm-AMM sends require live mode. This dry-run sent nothing.

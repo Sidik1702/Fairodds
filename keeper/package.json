@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "@anchor-lang/core": "^1.2.2",
+    "@pm-amm/sdk": "0.2.0",
+    "@solana/web3.js": "^1.95.0"
+  },
+  "description": "FairOdds keeper bot \u2014 takes the forecast engine's daily slate, commits predictions to ForecastRegistry (hash on-chain before trading opens), creates each market on the pm-AMM with custom seed = model probability, and after expiry attests resolutions (Pyth-derived) and drives pm-AMM resolution/claim.",
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.6.0"
+  },
+  "name": "fairodds-keeper",
+  "notes": "STEP 3 (Nov 21): ForecastRegistry DEPLOYED to devnet (program G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU, deploy tx EysiVYthJRkLA6WvHEmSxqun6k7m1bF13BPY5pzcKPuGUc11uy2RxEgbSExQhdVTprsdvM8oGW4RYfmzW4Ex7vc). `npm run plan` remains the dry-run (its registry client has no live transport, so sends stay gated). `npm run live` (src/liveRun.ts) is the one-market live runner: choose marketId -> derive market PDA -> commit_prediction -> initializeMarket+depositLiquidity with that id -> wait -> Coinbase-at-expiry resolution (documented fallback for the stale Pyth devnet feed) -> resolveMarket -> attest_resolution -> on-chain record verification. State checkpointed to examples/step3-live-state.json after every step.",
+  "private": true,
+  "scripts": {
+    "plan": "tsx src/cli.ts plan",
+    "test": "tsx --test test/jobs.test.ts test/registry.test.ts test/plan.test.ts",
+    "live": "tsx src/liveRun.ts"
+  },
+  "version": "0.3.0"
+}

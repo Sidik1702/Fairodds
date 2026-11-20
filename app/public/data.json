@@ -1,0 +1,67 @@
+{
+  "source": "live",
+  "fetchedAt": "2026-11-20T19:13:36.465Z",
+  "rpcUrl": "https://api.devnet.solana.com",
+  "registryProgram": "G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU",
+  "pmammProgram": "GV1FMGHRYBjQLaghE5fnGuYCuCcpdt3GD5xEX3TwN16y",
+  "records": [
+    {
+      "address": "AJdwPfYkg3577B46VjPhAfVV7r1dnXryQkN5uEVquALq",
+      "market": "3KhWpiKLmWt4DJn4EbBJfRFK5M68Dpz5yto8HKd7zvAu",
+      "forecaster": "6c1eJRKMymbts1wPK5yxDPBg9ZXcdXRVVRmFGVhNTHFH",
+      "predictionHash": "5fb459a0f85b0b7bda8b4d0d9a6a9d96206a4fdafc9bc40e6b7f7c8e8c36b8a0",
+      "modelProbBps": 6200,
+      "modelVersion": "kernel-lr-v1",
+      "strikeRaw": "6850000000",
+      "strikeUsd": 68.5,
+      "committedAt": 1795201085,
+      "resolved": true,
+      "outcomeYes": true,
+      "pythPriceAccount": "11111111111111111111111111111111",
+      "observedPriceRaw": "6858000000",
+      "observedPriceUsd": 68.58,
+      "observedSlot": "524451475",
+      "attestedAt": 1795201487,
+      "brierE8": "14440000",
+      "brier": 0.1444,
+      "bump": 252
+    }
+  ],
+  "aggregate": {
+    "totalPredictions": 1,
+    "resolvedPredictions": 1,
+    "meanBrier": 0.1444,
+    "baselineBrier": 0.25,
+    "improvementPct": 42.24
+  },
+  "markets": [
+    {
+      "address": "3KhWpiKLmWt4DJn4EbBJfRFK5M68Dpz5yto8HKd7zvAu",
+      "label": "Step-3 live keeper run — SOL > $68.50 in 360 s, seeded at the model's 62%",
+      "name": "FairOdds live: SOL above $68.50 in 6 min? (seed 62%)",
+      "authority": "6c1eJRKMymbts1wPK5yxDPBg9ZXcdXRVVRmFGVhNTHFH",
+      "marketId": "220999436532452",
+      "startTs": 1795201089,
+      "endTs": 1795201448,
+      "resolved": true,
+      "winningSide": 1,
+      "winningLabel": "YES",
+      "initialPriceBps": 6200,
+      "totalLpShares": "2814749767106560000000"
+    },
+    {
+      "address": "9mxS9rrZekcwvFPVo1nVqqNxNiE9PExhuSvyqzh3Vxni",
+      "label": "Day-2 lifecycle — first end-to-end pm-AMM run (create → swap → resolve → claim)",
+      "name": "FairOdds smoke: SOL up in 5 min? (model seed 62%)",
+      "authority": "6c1eJRKMymbts1wPK5yxDPBg9ZXcdXRVVRmFGVhNTHFH",
+      "marketId": "2347281332404",
+      "startTs": 1795193133,
+      "endTs": 1795193491,
+      "resolved": true,
+      "winningSide": 1,
+      "winningLabel": "YES",
+      "initialPriceBps": 6200,
+      "totalLpShares": "14073748835532800000000"
+    }
+  ]
+}

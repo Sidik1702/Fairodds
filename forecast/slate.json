@@ -1,0 +1,83 @@
+{
+  "generated_at": 1795191554,
+  "markets": [
+    {
+      "asset": "SOL",
+      "question": "Will SOL close above $67.00 in 24h?",
+      "strike": 67.0,
+      "spot": 68.52,
+      "model_probability": 0.7545,
+      "initial_price_bps": 7545,
+      "duration_secs": 86400,
+      "opens_at": 1795191549,
+      "expires_at": 1795277949,
+      "comparables_ess": 13.3,
+      "data_source": "live Coinbase fetch"
+    },
+    {
+      "asset": "SOL",
+      "question": "Will SOL close above $68.50 in 24h?",
+      "strike": 68.5,
+      "spot": 68.52,
+      "model_probability": 0.4897,
+      "initial_price_bps": 4897,
+      "duration_secs": 86400,
+      "opens_at": 1795191549,
+      "expires_at": 1795277949,
+      "comparables_ess": 13.3,
+      "data_source": "live Coinbase fetch"
+    },
+    {
+      "asset": "SOL",
+      "question": "Will SOL close above $69.00 in 24h?",
+      "strike": 69.0,
+      "spot": 68.52,
+      "model_probability": 0.293,
+      "initial_price_bps": 2930,
+      "duration_secs": 86400,
+      "opens_at": 1795191549,
+      "expires_at": 1795277949,
+      "comparables_ess": 13.3,
+      "data_source": "live Coinbase fetch"
+    },
+    {
+      "asset": "BTC",
+      "question": "Will BTC close above $58050 in 24h?",
+      "strike": 58050.0,
+      "spot": 59254.56,
+      "model_probability": 0.8162,
+      "initial_price_bps": 8162,
+      "duration_secs": 86400,
+      "opens_at": 1795191554,
+      "expires_at": 1795277954,
+      "comparables_ess": 22.9,
+      "data_source": "live Coinbase fetch"
+    },
+    {
+      "asset": "BTC",
+      "question": "Will BTC close above $58650 in 24h?",
+      "strike": 58650.0,
+      "spot": 59254.56,
+      "model_probability": 0.6794,
+      "initial_price_bps": 6794,
+      "duration_secs": 86400,
+      "opens_at": 1795191554,
+      "expires_at": 1795277954,
+      "comparables_ess": 22.9,
+      "data_source": "live Coinbase fetch"
+    },
+    {
+      "asset": "BTC",
+      "question": "Will BTC close above $59250 in 24h?",
+      "strike": 59250.0,
+      "spot": 59254.56,
+      "model_probability": 0.3363,
+      "initial_price_bps": 3363,
+      "duration_secs": 86400,
+      "opens_at": 1795191554,
+      "expires_at": 1795277954,
+      "comparables_ess": 22.9,
+      "data_source": "live Coinbase fetch"
+    }
+  ]
+}

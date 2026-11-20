@@ -1,0 +1,436 @@
+{
+  "address": "G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU",
+  "metadata": {
+    "name": "forecast_registry",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "FairOdds ForecastRegistry \u2014 on-chain prediction commitments and resolution attestations for model-seeded pm-AMM markets"
+  },
+  "instructions": [
+    {
+      "name": "commit_prediction",
+      "docs": [
+        "Commit a prediction for a pm-AMM market before trading opens.",
+        "",
+        "`prediction_hash` = hash(market_pubkey || model_prob_bps || model_version || issued_at)",
+        "The full prediction payload is stored alongside the hash so the",
+        "commitment is verifiable without trusting an off-chain database.",
+        "One record exists per market: the PDA is derived from the market, so",
+        "a second commit for the same market fails (account already in use) \u2014",
+        "predictions can never be re-committed or edited."
+      ],
+      "discriminator": [
+        92,
+        250,
+        182,
+        231,
+        10,
+        22,
+        234,
+        71
+      ],
+      "accounts": [
+        {
+          "name": "prediction",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  101,
+                  100,
+                  105,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "market"
+              }
+            ]
+          }
+        },
+        {
+          "name": "keeper",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "market",
+          "type": "pubkey"
+        },
+        {
+          "name": "prediction_hash",
+          "type": {
+            "array": [
+              "u8",
+              32
+            ]
+          }
+        },
+        {
+          "name": "model_prob_bps",
+          "type": "u16"
+        },
+        {
+          "name": "model_version",
+          "type": "string"
+        },
+        {
+          "name": "strike",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "attest_resolution",
+      "docs": [
+        "Attest the resolution of a previously committed prediction.",
+        "",
+        "`outcome_yes` is derived off-chain from the Pyth feed at expiry and",
+        "posted here by the forecaster; the attestation records the Pyth price",
+        "account, observed price and slot used so the derivation is auditable",
+        "(docs/ARCHITECTURE.md \u00a74). The Brier score contribution is computed",
+        "in-program from the committed probability and the attested outcome."
+      ],
+      "discriminator": [
+        138,
+        53,
+        16,
+        17,
+        209,
+        185,
+        147,
+        5
+      ],
+      "accounts": [
+        {
+          "name": "prediction",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  101,
+                  100,
+                  105,
+                  99,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "prediction.market",
+                "account": "PredictionRecord"
+              }
+            ]
+          }
+        },
+        {
+          "name": "keeper",
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "outcome_yes",
+          "type": "bool"
+        },
+        {
+          "name": "pyth_price_account",
+          "type": "pubkey"
+        },
+        {
+          "name": "observed_price",
+          "type": "i64"
+        },
+        {
+          "name": "observed_slot",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "forecast_registry::PredictionRecord",
+      "discriminator": [
+        75,
+        202,
+        55,
+        23,
+        136,
+        28,
+        7,
+        241
+      ]
+    }
+  ],
+  "types": [
+    {
+      "name": "forecast_registry::PredictionRecord",
+      "docs": [
+        "On-chain record for one committed prediction. One PDA per pm-AMM market,",
+        "derived with seeds [b\"prediction\", market]."
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "market",
+            "docs": [
+              "The pm-AMM market this prediction is about."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "forecaster",
+            "docs": [
+              "The forecaster authority that committed the prediction; the only",
+              "signer allowed to attest its resolution."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "prediction_hash",
+            "docs": [
+              "hash(market || model_prob_bps || model_version || issued_at)."
+            ],
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "model_prob_bps",
+            "docs": [
+              "Model probability for YES, in basis points (0..=10_000)."
+            ],
+            "type": "u16"
+          },
+          {
+            "name": "model_version",
+            "docs": [
+              "Model version tag, e.g. \"kernel-lr-v1\"."
+            ],
+            "type": "string"
+          },
+          {
+            "name": "strike",
+            "docs": [
+              "Strike / threshold of the market question, in the same raw units as",
+              "`observed_price` (Pyth-style integer price): YES wins iff the observed",
+              "price at expiry is above the strike (docs/ARCHITECTURE.md \u00a74)."
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "committed_at",
+            "docs": [
+              "Unix timestamp of the commit."
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "resolved",
+            "docs": [
+              "Whether a resolution has been attested."
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "outcome_yes",
+            "docs": [
+              "The attested outcome (meaningful only once `resolved` is true)."
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "pyth_price_account",
+            "docs": [
+              "Pyth price account the outcome was derived from."
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "observed_price",
+            "docs": [
+              "Price observed at expiry, raw Pyth-style integer units."
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "observed_slot",
+            "docs": [
+              "Slot at which the price was observed."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "attested_at",
+            "docs": [
+              "Unix timestamp of the attestation."
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "brier_score_e8",
+            "docs": [
+              "Brier score contribution computed in-program at attestation time,",
+              "scaled by 10^8 (see `compute_brier_e8`). 0 until resolved."
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "PDA bump."
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "forecast_registry::PredictionCommitted",
+      "type": {
+        "fields": [
+          {
+            "name": "market",
+            "type": "pubkey"
+          },
+          {
+            "name": "forecaster",
+            "type": "pubkey"
+          },
+          {
+            "name": "prediction_hash",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "model_prob_bps",
+            "type": "u16"
+          },
+          {
+            "name": "strike",
+            "type": "i64"
+          },
+          {
+            "name": "committed_at",
+            "type": "i64"
+          }
+        ],
+        "kind": "struct"
+      }
+    },
+    {
+      "name": "forecast_registry::ResolutionAttested",
+      "type": {
+        "fields": [
+          {
+            "name": "market",
+            "type": "pubkey"
+          },
+          {
+            "name": "outcome_yes",
+            "type": "bool"
+          },
+          {
+            "name": "observed_price",
+            "type": "i64"
+          },
+          {
+            "name": "observed_slot",
+            "type": "u64"
+          },
+          {
+            "name": "brier_score_e8",
+            "type": "u64"
+          }
+        ],
+        "kind": "struct"
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidProbability",
+      "msg": "Model probability must be within 0..=10000 bps"
+    },
+    {
+      "code": 6001,
+      "name": "ModelVersionTooLong",
+      "msg": "Model version string exceeds the maximum stored length"
+    },
+    {
+      "code": 6002,
+      "name": "AlreadyResolved",
+      "msg": "Prediction has already been resolved"
+    },
+    {
+      "code": 6003,
+      "name": "UnauthorizedAttester",
+      "msg": "Only the forecaster who committed the prediction may attest its resolution"
+    },
+    {
+      "code": 6004,
+      "name": "AttestationTooEarly",
+      "msg": "Resolution cannot be attested at or before the commit timestamp"
+    }
+  ],
+  "events": [
+    {
+      "discriminator": [
+        173,
+        169,
+        15,
+        243,
+        215,
+        12,
+        123,
+        188
+      ],
+      "name": "forecast_registry::PredictionCommitted"
+    },
+    {
+      "discriminator": [
+        84,
+        12,
+        121,
+        71,
+        165,
+        74,
+        144,
+        160
+      ],
+      "name": "forecast_registry::ResolutionAttested"
+    }
+  ]
+}

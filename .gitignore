@@ -1,0 +1,13 @@
+target/
+node_modules/
+.next/
+.env*
+*.keypair.json
+keypair*.json
+.anchor/
+test-ledger/
+dist/
+.DS_Store
+*keypair*
+*secret*
+__pycache__/

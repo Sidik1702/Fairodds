@@ -1,0 +1,1 @@
+Every prediction market opens with a guess. Most start at fifty-fifty and hope the crowd figures it out. FairOdds opens every market at a forecast — a calibrated probability from a real model, committed on-chain before anyone can trade, and graded on-chain when it resolves. This is FairOdds, by Pasukan Satset.

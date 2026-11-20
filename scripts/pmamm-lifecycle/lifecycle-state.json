@@ -1,0 +1,12 @@
+{
+  "market": "9mxS9rrZekcwvFPVo1nVqqNxNiE9PExhuSvyqzh3Vxni",
+  "marketId": null,
+  "createSignature": "4eH5HU77ZF5nZ7QpUs3bqBe1EtQfS9jZ2h3Q4cWRD8iwRur99JofBUxRMR7hhjSKBDvF3j8VpxJxydkYtAbyXd4L",
+  "swapSignature": "5zchVyvXpA3FSaPbvWoXMtoz4pRcWhxU9kjgcVgLP2rmnbirPkNqRQmbvFrHHH3yCttocvvtsAQGJfQobNMEb4HT",
+  "endTs": 1795193491,
+  "recoveredAfterWsTimeout": true,
+  "yesBalanceAfterSwap": 7.677492,
+  "resolveSignature": "2vXJVDqmyFbBbvj2JnxHbSsAjPgNsLLkQ94uT7rm9V1yBpTF3dtcDD6KYiRSQ3HLj4SNffWDRyYsRBssPpP4BL5t",
+  "claimSignature": "5u2MoBAwDWzefudwZ64zt5KHaDA4tA9nhfopcjEYCKNoxP7Rc12183r94AW6hWZoGHtEbXU1cLEFmjauso5qeYgC",
+  "musdcClaimed": 7.677492000000029
+}

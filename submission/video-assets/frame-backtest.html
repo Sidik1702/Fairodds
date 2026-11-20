@@ -1,0 +1,31 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{width:1920px;height:1080px;background:#0b0e17;color:#e8ecf4;font-family:'DejaVu Sans',Arial,sans-serif;padding:64px 90px}
+h1{font-size:54px;margin-bottom:10px}
+.sub{font-size:27px;color:#9aa4bd;margin-bottom:44px}
+.panel{background:#101527;border:1.5px solid #232a45;border-radius:18px;padding:36px 40px;margin-bottom:28px}
+.brow{display:flex;align-items:center;gap:26px;margin-bottom:30px}
+.brow:last-child{margin-bottom:0}
+.name{flex:0 0 430px;font-size:29px}
+.name small{display:block;font-size:22px;color:#9aa4bd;margin-top:4px}
+.track{flex:1;height:34px;background:#1a2138;border-radius:8px;overflow:hidden}
+.fill{height:100%;border-radius:8px}
+.val{flex:0 0 130px;font-size:32px;font-weight:bold;text-align:right}
+.stats{display:flex;gap:20px;margin-bottom:28px}
+.stat{flex:1;background:#101527;border:1.5px solid #232a45;border-radius:18px;padding:24px 30px;text-align:center}
+.stat b{font-size:40px;display:block}
+.stat span{font-size:22px;color:#9aa4bd}
+.note{background:#101527;border:1.5px solid #8b5cf6;border-radius:18px;padding:26px 36px;font-size:26px;line-height:1.5;color:#c6cddd}
+.note b{color:#fff}
+</style></head><body>
+<h1>Backtest — walk-forward, no look-ahead</h1>
+<div class="sub">Brier score (lower is better) · 180 days of hourly SOL + BTC closes · strikes at spot × {0.95, 0.975, 1.00, 1.025, 1.05}</div>
+<div class="panel">
+<div class="brow"><div class="name"><b>FairOdds kernel model</b><small>kernel-weighted comparables, shrunk to base rate</small></div><div class="track"><div class="fill" style="width:42.9%;background:linear-gradient(90deg,#8b5cf6,#2ee6a8)"></div></div><div class="val">0.1073</div></div>
+<div class="brow"><div class="name">Naive momentum<small>Normal, trailing-24h drift</small></div><div class="track"><div class="fill" style="width:58.6%;background:#5f6b84"></div></div><div class="val">0.1464</div></div>
+<div class="brow"><div class="name">Unconditional base rate<small>pool frequency</small></div><div class="track"><div class="fill" style="width:42.3%;background:#5f6b84"></div></div><div class="val">0.1057</div></div>
+<div class="brow"><div class="name">Coin flip — the default 50% seed<small>flat 50% on every question</small></div><div class="track"><div class="fill" style="width:100%;background:#3d465e"></div></div><div class="val">0.2500</div></div>
+</div>
+<div class="stats"><div class="stat"><b>6,320</b><span>forecasts graded</span></div><div class="stat"><b>−27%</b><span>Brier vs momentum</span></div><div class="stat"><b>−57%</b><span>Brier vs coin flip</span></div><div class="stat"><b>~0.01</b><span>calibration error, high-mass buckets</span></div></div>
+<div class="note"><b>The honest finding:</b> in this sample — one persistent downtrend — the model <b>ties the base rate</b> (0.1073 vs 0.1057). v1's claim is narrower and defensible: calibrated, fair seeds, never worse than the base rate by more than noise — and every live forecast from now on is graded in public, on-chain.</div>
+</body></html>

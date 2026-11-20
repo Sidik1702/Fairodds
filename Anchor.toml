@@ -1,0 +1,24 @@
+[features]
+resolution = true
+skip-lint = false
+
+[programs.devnet]
+forecast_registry = "G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU"
+
+[programs.localnet]
+forecast_registry = "G4Gib3N2vGVR4JaGjCGyvwHidz1EF3hjdztQYHZ17VgU"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "devnet"
+wallet = "" # set locally at deploy time (Nov 22 slot) — never commit a keypair path
+
+[scripts]
+test = "cargo test"
+
+# NOTE: pm-AMM is an external, already-deployed program — we do NOT build or
+# deploy it. Program ID (devnet + mainnet): GV1FMGHRYBjQLaghE5fnGuYCuCcpdt3GD5xEX3TwN16y
+# Local validation uses LiteSVM/Mollusk in-process tests (sandbox blocks UDP,
+# so no local validator). Devnet interaction goes over HTTPS RPC only.
